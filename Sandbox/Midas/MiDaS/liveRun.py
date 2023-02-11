@@ -163,7 +163,9 @@ def run(input_path, output_path, model_path, model_type="large", optimize=True):
 
             output = output_image.astype(np.uint8)
 
-            blurred = cv2.adaptiveThreshold(output,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,19,2)
+            ret, blurred = cv2.threshold(output, 125, 255, cv2.THRESH_BINARY)
+
+            #blurred = cv2.adaptiveThreshold(output,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY,15,5)
 
             contours, heirarchy = cv2.findContours(image=blurred, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_SIMPLE)
 
